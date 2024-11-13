@@ -1,28 +1,25 @@
 import { Link } from "react-router-dom";
 import Searchbar from "../Hero/Searchbar/Searchbar";
 
-const navItemClasses = "hover:text-gray-400";
-
 export default function Navbar() {
+  const navLinks = ["Home", "about", "colours"];
+
   return (
     <nav className="w-screen bg-jjjBlue py-2">
       <ul className="  list-none w-3/4 m-auto flex">
         <div className="flex justify-between items-center uppercase w-1/2 mr-52">
-          <li>
-            <Link to="/" className={navItemClasses}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className={navItemClasses}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" className={navItemClasses}>
-              Colours
-            </Link>
-          </li>
+          {navLinks.map((link) => {
+            return (
+              <li>
+                <Link
+                  to="/"
+                  className="text-jjjWhite font-medium tracking-wider hover:text-gray-300"
+                >
+                  {link}
+                </Link>
+              </li>
+            );
+          })}
         </div>
         <Searchbar />
       </ul>
