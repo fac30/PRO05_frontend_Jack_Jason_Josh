@@ -1,12 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    colors: {
+      jjjWhite: "#FCFCFC",
+      jjjBlue: "#628395",
+      jjjBlack: "#07090F",
+      jjjGreen: "#AAA95A",
+      jjjYellow: "#FFBE0B",
+    },
     extend: {},
   },
   plugins: [],
-}
-
+};

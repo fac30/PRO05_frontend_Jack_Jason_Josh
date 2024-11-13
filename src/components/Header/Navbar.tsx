@@ -5,7 +5,7 @@ const navItemClasses = "hover:text-gray-400";
 export default function Navbar() {
   return (
     <nav>
-      <ul className="flex space-x-4 list-none">
+      <ul className="flex justify-between list-none w-full">
         <li>
           <Link to="/" className={navItemClasses}>
             Home
