@@ -14,8 +14,9 @@ export default function Navbar() {
         <div className="flex justify-between items-center uppercase w-1/2 mr-52">
           {navLinks.map((link) => {
             return (
-              <li>
+              <li key={link.text}>
                 <Link
+                  key={link.link}
                   to={link.link}
                   className="text-jjjWhite font-medium tracking-wider hover:text-gray-300"
                 >
