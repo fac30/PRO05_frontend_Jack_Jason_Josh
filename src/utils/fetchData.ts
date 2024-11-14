@@ -1,6 +1,6 @@
-export async function fetchData (api: string, query: string, method: string = 'GET'): Promise<any> {
+export async function fetchData (query: string, method: string = 'GET'): Promise<any> {
     try {
-        const response = await fetch(`https://${api}/${query}`, {
+        const response = await fetch(`http://localhost:5187${query}`, {
             method: `${method}`,
             headers: {
             "Content-Type": "application/json",
