@@ -63,6 +63,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
+  const { login, checkAuthStatus, isAuthenticated } = useAuth();
+
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
@@ -77,10 +79,9 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const { login } = useAuth();
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log("Form submitted");
 
     if (emailError || passwordError) {
       return;
@@ -107,49 +108,53 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       );
 
       if (!response.ok) {
+        const errorData = await response.text();
+        console.error("Login response:", errorData);
         throw new Error("Login failed");
       }
 
-      // Success! No need to parse response JSON
       console.log("Login successful");
 
-      login();
+      // Wait for the auth status to update
+      await checkAuthStatus();
 
-      // Redirect on success
       window.location.href = "/";
+      if (isAuthenticated) {
+        console.log("hello, logged in");
+      } else {
+        console.error("Login succeeded but auth status not updated");
+      }
     } catch (error) {
       console.error("Error:", error);
-      // Add user-friendly error handling here
-      // You might want to show an error message to the user
     }
   };
 
-  const validateInputs = () => {
-    const email = document.getElementById("email") as HTMLInputElement;
-    const password = document.getElementById("password") as HTMLInputElement;
+  // const validateInputs = () => {
+  //   const email = document.getElementById("email") as HTMLInputElement;
+  //   const password = document.getElementById("password") as HTMLInputElement;
 
-    let isValid = true;
+  //   let isValid = true;
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true);
-      setEmailErrorMessage("Please enter a valid email address.");
-      isValid = false;
-    } else {
-      setEmailError(false);
-      setEmailErrorMessage("");
-    }
+  //   if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
+  //     setEmailError(true);
+  //     setEmailErrorMessage("Please enter a valid email address.");
+  //     isValid = false;
+  //   } else {
+  //     setEmailError(false);
+  //     setEmailErrorMessage("");
+  //   }
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true);
-      setPasswordErrorMessage("Password must be at least 6 characters long.");
-      isValid = false;
-    } else {
-      setPasswordError(false);
-      setPasswordErrorMessage("");
-    }
+  //   if (!password.value || password.value.length < 6) {
+  //     setPasswordError(true);
+  //     setPasswordErrorMessage("Password must be at least 6 characters long.");
+  //     isValid = false;
+  //   } else {
+  //     setPasswordError(false);
+  //     setPasswordErrorMessage("");
+  //   }
 
-    return isValid;
-  };
+  //   return isValid;
+  // };
   return (
     <>
       <CssBaseline enableColorScheme />
@@ -219,7 +224,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               type="submit"
               fullWidth
               variant="contained"
-              onClick={validateInputs}
+              // onClick={validateInputs}
             >
               Sign in
             </Button>
