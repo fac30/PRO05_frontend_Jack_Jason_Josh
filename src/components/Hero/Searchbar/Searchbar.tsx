@@ -8,13 +8,17 @@ export default function Searchbar() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Find all colours that match the search query
-    const matchingColours = colours.filter(colour => 
-      colour.hex.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const matchingColours = colours.filter(colour => {
+      const match = colour.hex.toLowerCase().includes(searchQuery.toLowerCase());
+      if (match) {
+        console.log("Match Found:", colour); 
+      }
+      return match;
+    });
 
-    // Log the matching colours (or do something with them, e.g., set them in state)
-    console.log(matchingColours);
+    if (matchingColours.length === 0) {
+      alert("No matching colours found.");
+    }
   };
 
   return (
@@ -43,7 +47,7 @@ export default function Searchbar() {
           <input
             type="search"
             id="default-search"
-            value={searchQuery} // Bind state to input field
+            value={searchQuery} 
             onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
             placeholder="Search our Colours"
@@ -57,6 +61,7 @@ export default function Searchbar() {
           </button>
         </div>
       </form>
+  
     </div>
   );
 }

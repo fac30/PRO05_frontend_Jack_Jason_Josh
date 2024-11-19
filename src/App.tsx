@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ColoursProvider } from "./contexts/ColourContext"; // Ensure the path is correct
+import { ColoursProvider } from "./contexts/ColourContext"; // This matches the export
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
@@ -11,7 +11,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      <ColoursProvider> {/* Move the ColoursProvider here */}
+      <ColoursProvider> {/* Wrap everything with the ColoursProvider */}
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

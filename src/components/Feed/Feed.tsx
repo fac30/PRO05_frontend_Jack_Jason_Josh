@@ -1,22 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../utils/fetchData";
+// Feed.tsx
 
-interface Colour {
-  id: number;
-  hex: string;
-}
+import { useColours } from "../../contexts/ColourContext"; // Ensure the path is correct
 
 export default function Feed() {
-  const [colours, setColours] = useState<Colour[]>([]);
-
-  const fetchColours = async () => {
-    const data: Colour[] = await fetchData("colours", "GET");
-    setColours(data);
-  };
-
-  useEffect(() => {
-    fetchColours();
-  }, []);
+  const { colours } = useColours(); // Access colours from context
 
   return (
     <>
