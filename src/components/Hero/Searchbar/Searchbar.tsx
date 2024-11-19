@@ -1,23 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { useColours } from "../../../contexts/ColourContext"; 
 
 export default function Searchbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const { colours } = useColours(); 
+  const navigate = useNavigate(); 
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const matchingColours = colours.filter(colour => {
-      const match = colour.hex.toLowerCase().includes(searchQuery.toLowerCase());
-      if (match) {
-        console.log("Match Found:", colour); 
-      }
-      return match;
-    });
+    const matchingColour = colours.find((colour) =>
+      colour.hex.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-    if (matchingColours.length === 0) {
+    if (!matchingColour) {
       alert("No matching colours found.");
+    } else {
+      navigate("/colourpage", { state: { hex: matchingColour.hex } });
     }
   };
 
@@ -39,15 +39,14 @@ export default function Searchbar() {
               fill="none"
               viewBox="0 0 20 20"
             >
-              <path
-              />
+              <path />
             </svg>
           </div>
           <input
             type="search"
             id="default-search"
             value={searchQuery} 
-            onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
             placeholder="Search our Colours"
             required
@@ -60,7 +59,6 @@ export default function Searchbar() {
           </button>
         </div>
       </form>
-  
     </div>
   );
 }
