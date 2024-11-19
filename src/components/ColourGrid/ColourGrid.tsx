@@ -33,45 +33,42 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
 
   useEffect(() => {
     fetchColourNames();
-  }, []);
+  }, [coloursArray]);
 
   return (
     <div className="grid grid-cols-4 w-11/12 m-auto gap-8">
       {coloursArray.map((colour, index) => (
-        <>
-          <Card>
-            <CardContent>
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                gap={2}
-              >
-                <div
-                  key={colour.id}
-                  className="h-52 w-52"
-                  style={{ backgroundColor: `#${colour.hex}` }}
-                ></div>
-                <Typography gutterBottom sx={{ color: "", fontSize: "large" }}>
-                  {colourNames[index]}
-                </Typography>
-                {/* <Typography variant="h5" component="div"></Typography> */}
-                {/* <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+        <Card key={colour.id}>
+          <CardContent>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={2}
+            >
+              <div
+                className="h-52 w-52"
+                style={{ backgroundColor: `#${colour.hex}` }}
+              ></div>
+              <Typography gutterBottom sx={{ color: "", fontSize: "large" }}>
+                {colourNames[index]}
+              </Typography>
+              {/* <Typography variant="h5" component="div"></Typography> */}
+              {/* <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                     Necessitatibus eaque vel ullam.
                   </Typography> */}
-                {/* <Typography variant="body2"></Typography> */}
-              </Box>
-            </CardContent>
-            <CardActions>
-              <Box display={"flex"} justifyContent={"center"} width={"100%"}>
-                <Button size="medium">Favourite</Button>
-                <Button size="medium">Add to Palette</Button>
-              </Box>
-            </CardActions>
-          </Card>
-        </>
+              {/* <Typography variant="body2"></Typography> */}
+            </Box>
+          </CardContent>
+          <CardActions>
+            <Box display={"flex"} justifyContent={"center"} width={"100%"}>
+              <Button size="medium">Favourite</Button>
+              <Button size="medium">Add to Palette</Button>
+            </Box>
+          </CardActions>
+        </Card>
       ))}
     </div>
   );
