@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ColoursProvider } from "./contexts/ColourContext"; // Ensure the path is correct
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
@@ -9,8 +10,8 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <ColoursProvider> {/* Move the ColoursProvider here */}
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,8 +20,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
-      </Router>
-    </>
+      </ColoursProvider>
+    </Router>
   );
 }
 

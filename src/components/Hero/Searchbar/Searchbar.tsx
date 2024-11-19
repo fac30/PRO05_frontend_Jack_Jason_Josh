@@ -1,22 +1,25 @@
 import { useState } from "react";
+import { useColours } from "../../../contexts/ColourContext"; // Import the custom hook
 
-interface SearchbarProps {
-  onSearch: (hexCode: string) => void; // Correctly typing the props
-}
-
-export default function Searchbar({ onSearch }: SearchbarProps) {
+export default function Searchbar() {
   const [searchQuery, setSearchQuery] = useState("");
+  const { colours } = useColours(); // Access colours from context
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery) {
-      onSearch(searchQuery.trim());
-    }
+
+    // Find all colours that match the search query
+    const matchingColours = colours.filter(colour => 
+      colour.hex.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    // Log the matching colours (or do something with them, e.g., set them in state)
+    console.log(matchingColours);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="max-w-md min-w-96 mx-auto">
+      <form onSubmit={handleSearch} className="max-w-md min-w-96 mx-auto">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -33,20 +36,16 @@ export default function Searchbar({ onSearch }: SearchbarProps) {
               viewBox="0 0 20 20"
             >
               <path
-              // stroke="currentColor"
-              // stroke-linecap="round"
-              // stroke-linejoin="round"
-              // stroke-width="2"
-              // d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                // Add your SVG path here for the search icon
               />
             </svg>
           </div>
           <input
             type="search"
             id="default-search"
-            value={searchQuery} // Bind state to the input field
+            value={searchQuery} // Bind state to input field
             onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 "
+            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
             placeholder="Search our Colours"
             required
           />
