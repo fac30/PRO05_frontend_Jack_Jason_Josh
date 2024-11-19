@@ -1,9 +1,9 @@
 // Feed.tsx
 
-import { useColours } from "../../contexts/ColourContext"; // Ensure the path is correct
+import { useColours } from "../../contexts/ColourContext"; 
 
 export default function Feed() {
-  const { colours } = useColours(); // Access colours from context
+  const { colours } = useColours(); 
 
   return (
     <>

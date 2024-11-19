@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useColours } from "../../../contexts/ColourContext"; // Import the custom hook
+import { useColours } from "../../../contexts/ColourContext"; 
 
 export default function Searchbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { colours } = useColours(); // Access colours from context
+  const { colours } = useColours(); 
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +40,6 @@ export default function Searchbar() {
               viewBox="0 0 20 20"
             >
               <path
-                // Add your SVG path here for the search icon
               />
             </svg>
           </div>
