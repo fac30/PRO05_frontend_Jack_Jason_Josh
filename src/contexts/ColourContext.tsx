@@ -1,7 +1,5 @@
-// ColoursContext.tsx
-
 import { createContext, useState, ReactNode, useContext, useEffect } from "react";
-import { fetchData } from "../utils/fetchData";  // Update this import path
+import { fetchData } from "../utils/fetchData";  
 
 interface Colour {
   id: number;
@@ -13,7 +11,6 @@ const ColoursContext = createContext<{ colours: Colour[]; setColours: (colours: 
 export const ColoursProvider = ({ children }: { children: ReactNode }) => {
   const [colours, setColours] = useState<Colour[]>([]);
 
-  // Fetch colours from an API when the provider is mounted
   const fetchColours = async () => {
     try {
       const data: Colour[] = await fetchData("colours", "GET");
@@ -24,7 +21,7 @@ export const ColoursProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    fetchColours(); // Fetch colours when the provider is mounted
+    fetchColours(); 
   }, []);
 
   return (
@@ -34,7 +31,6 @@ export const ColoursProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Named export for the hook
 export const useColours = () => {
   const context = useContext(ColoursContext);
   if (!context) {
