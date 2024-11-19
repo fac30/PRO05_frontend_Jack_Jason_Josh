@@ -33,7 +33,7 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
 
   useEffect(() => {
     fetchColourNames();
-  });
+  }, []);
 
   return (
     <div className="grid grid-cols-4 w-11/12 m-auto gap-8">
