@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../utils/fetchData";
 import ColourGrid from "../ColourGrid/ColourGrid";
 
 import { useColours } from "../../contexts/ColourContext"; 
