@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
+import { useAuth } from "../../../contexts/AuthContext";
+
 // import ForgotPassword from "./ForgotPassword";
 // import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./CustomIcons";
 // import AppTheme from "../shared-theme/AppTheme";
@@ -75,16 +77,51 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (emailError || passwordError) {
-      event.preventDefault();
       return;
     }
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const payload = {
+      email: data.get("email") as string,
+      password: data.get("password") as string,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5187/login?useCookies=true&useSessionCookies=true",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      // Success! No need to parse response JSON
+      console.log("Login successful");
+
+      login();
+
+      // Redirect on success
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error:", error);
+      // Add user-friendly error handling here
+      // You might want to show an error message to the user
+    }
   };
 
   const validateInputs = () => {
@@ -113,7 +150,6 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
     return isValid;
   };
-
   return (
     <>
       <CssBaseline enableColorScheme />
