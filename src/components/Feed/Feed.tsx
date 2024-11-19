@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
-import { fetchData } from "../../utils/fetchData";
 import ColourGrid from "../ColourGrid/ColourGrid";
 
-interface Colour {
-  id: number;
-  hex: string;
-}
+import { useColours } from "../../contexts/ColourContext"; 
 
 export default function Feed() {
-  const [colours, setColours] = useState<Colour[]>([]);
-
-  const fetchColours = async () => {
-    const data: Colour[] = await fetchData("colours", "GET");
-    setColours(data);
-  };
-
-  useEffect(() => {
-    fetchColours();
-  }, []);
+  const { colours } = useColours(); 
 
   return (
     <>
