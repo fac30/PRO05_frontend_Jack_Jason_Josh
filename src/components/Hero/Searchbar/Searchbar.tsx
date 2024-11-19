@@ -1,9 +1,24 @@
-export default function Searchbar() {
+import { useState } from "react";
+
+interface SearchbarProps {
+  onSearch: (hexCode: string) => void; // Correctly typing the props
+}
+
+export default function Searchbar({ onSearch }: SearchbarProps) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery) {
+      onSearch(searchQuery.trim());
+    }
+  };
+
   return (
-    <div className="">
-      <form className="max-w-md min-w-96 mx-auto">
+    <div>
+      <form onSubmit={handleSubmit} className="max-w-md min-w-96 mx-auto">
         <label
-          //   for="default-search"
+          htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
         >
           Search
@@ -29,13 +44,15 @@ export default function Searchbar() {
           <input
             type="search"
             id="default-search"
+            value={searchQuery} // Bind state to the input field
+            onChange={(e) => setSearchQuery(e.target.value)} // Update state on input change
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 "
             placeholder="Search our Colours"
             required
           />
           <button
             type="submit"
-            className="text-white absolute end-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 bg-jjjBlue hover:bg-[#4e758a] "
+            className="text-white absolute end-2.5 bottom-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 bg-jjjBlue hover:bg-[#4e758a]"
           >
             Search
           </button>
