@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Colours from "./pages/Colours";
 import ColourPage from "./pages/ColourPage";
 import SignUp from "./components/Auth/SignUp/SignUp";
+import SignIn from "./components/Auth/SignIn/SignIn";
 import "./App.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/colourpage" element={<ColourPage />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
         <Footer />
       </ColoursProvider>
