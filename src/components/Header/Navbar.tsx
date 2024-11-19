@@ -27,7 +27,7 @@ export default function Navbar() {
           })}
         </div>
         <Searchbar />
-        <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-semibold rounded-xl w-52 text-md">
+        <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-semibold rounded-xl w-52 text-lg">
           <Link to="/signup" className="text-black font-medium tracking-wider ">
             Sign Up
           </Link>{" "}
