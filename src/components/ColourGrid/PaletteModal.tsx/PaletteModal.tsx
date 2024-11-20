@@ -25,39 +25,50 @@ interface PaletteModalProps {
     id: string;
     name: string;
   }>;
-  colourId: number;
+  colour: Colour;
+}
+
+interface Colour {
+  id: number;
+  hex: string;
+  colourName: string;
+}
+
+interface Collection {
+  id: string;
+  name: string;
 }
 
 export default function PaletteModal({
   setOpen,
   open,
   userCollections,
-  colourId,
+  colour,
 }: PaletteModalProps) {
   //   console.log(userCollections);
   //   const handleClose = () => setOpen(false);
 
-  async function postData(collectionId: string, colourId: number) {
+  async function postData(collection: Collection, colour: Colour) {
     try {
-      const collection = await fetch(
-        `http://localhost:5187/collections/${collectionId}/colours`
+      const myCollection = await fetch(
+        `http://localhost:5187/collections/${collection.id}/colours`
       );
 
-      const myJson = await collection.json();
+      const myJson = await myCollection.json();
 
       const myLength = myJson.colours.length;
 
       console.log(myLength);
 
       const response = await fetch(
-        `http://localhost:5187/collections/${collectionId}/colours`,
+        `http://localhost:5187/collections/${collection.id}/colours`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            colourId: colourId,
+            colourId: colour.id,
             order: myLength,
           }),
         }
@@ -70,7 +81,7 @@ export default function PaletteModal({
 
       const data = await response.json();
       console.log("Success:", data);
-      alert("hello");
+      alert(`${colour.colourName} added to collection ${collection.name}`);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -111,7 +122,7 @@ export default function PaletteModal({
                         <button
                           key={index}
                           className="text-md text-gray-900 mb-2 bg-slate-200 hover:bg-slate-100 p-2"
-                          onClick={() => postData(collection.id, colourId)}
+                          onClick={() => postData(collection, colour)}
                         >
                           {collection.name}
                         </button>

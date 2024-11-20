@@ -81,7 +81,7 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
                 Add to Palette
               </Button>
               <PaletteModal
-                colourId={colour.id}
+                colour={colour}
                 open={open}
                 setOpen={setOpen}
                 userCollections={collections}
