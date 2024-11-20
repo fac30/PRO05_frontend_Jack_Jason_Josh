@@ -28,9 +28,7 @@ export default function UserCollections() {
   }, []);
 
   const handleCollectionClick = (collection) => {
-    console.log("clicked motherfucker");
-    console.log(collection);
-    // Navigate to the collection's page, passing the collection data
+
     navigate("/collection", { state: { collection } });
   };
 
@@ -44,7 +42,7 @@ export default function UserCollections() {
             onClick={() => handleCollectionClick(collection)}
             style={{ cursor: "pointer", color: "blue" }}
           >
-            {collection.name}``
+            {collection.name}
           </h2>
         );
       })}
