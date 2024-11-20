@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
+import { Button } from "@mui/material";
+import CollectionModal from "../components/CollectionModal/CollectionModal";
 
 interface Collection {
   id: string;
@@ -17,6 +19,10 @@ export default function UserCollections() {
   const { userId } = useParams<{ userId: string }>();
   const [collections, setCollections] = useState<Collection[]>([]);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const handleOpen = (colour: Colour) => {
+    setOpen(true);
+  };
 
   const getCollections = useCallback(async () => {
     try {
@@ -58,6 +64,10 @@ export default function UserCollections() {
           {collection.name}
         </h2>
       ))}
+      <Button onClick={handleOpen} size="large" color="success">
+        Create collection
+      </Button>
+      <CollectionModal open={open} setOpen={setOpen} />
     </div>
   );
 }
