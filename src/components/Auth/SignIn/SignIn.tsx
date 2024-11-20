@@ -62,8 +62,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }));
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
-  const { login, checkAuthStatus, isAuthenticated } = useAuth();
+export default function SignIn() {
+  const { checkAuthStatus, isAuthenticated } = useAuth();
 
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
@@ -129,39 +129,10 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     }
   };
 
-  // const validateInputs = () => {
-  //   const email = document.getElementById("email") as HTMLInputElement;
-  //   const password = document.getElementById("password") as HTMLInputElement;
-
-  //   let isValid = true;
-
-  //   if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-  //     setEmailError(true);
-  //     setEmailErrorMessage("Please enter a valid email address.");
-  //     isValid = false;
-  //   } else {
-  //     setEmailError(false);
-  //     setEmailErrorMessage("");
-  //   }
-
-  //   if (!password.value || password.value.length < 6) {
-  //     setPasswordError(true);
-  //     setPasswordErrorMessage("Password must be at least 6 characters long.");
-  //     isValid = false;
-  //   } else {
-  //     setPasswordError(false);
-  //     setPasswordErrorMessage("");
-  //   }
-
-  //   return isValid;
-  // };
   return (
     <>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
-        {/* <ColorModeSelect
-          sx={{ position: "fixed", top: "1rem", right: "1rem" }}
-          /> */}
         <Card variant="outlined">
           <Typography
             component="h1"
@@ -219,13 +190,8 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              // onClick={validateInputs}
-            >
+
+            <Button type="submit" fullWidth variant="contained">
               Sign in
             </Button>
             <Link
