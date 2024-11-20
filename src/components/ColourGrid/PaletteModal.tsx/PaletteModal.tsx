@@ -1,8 +1,3 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import {
   Dialog,
   DialogBackdrop,
@@ -11,28 +6,38 @@ import {
 } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+// };
+
+interface PaletteModalProps {
+  setOpen: (open: boolean) => void;
+  open: boolean;
+  userCollections: Array<{
+    id: string;
+    name: string;
+  }>;
+  colourId: string;
+}
 
 export default function PaletteModal({
   setOpen,
   open,
   userCollections,
   colourId,
-}) {
+}: PaletteModalProps) {
   //   console.log(userCollections);
   //   const handleClose = () => setOpen(false);
 
-  async function postData(collectionId, colourId) {
+  async function postData(collectionId: string, colourId: string) {
     try {
       const collection = await fetch(
         `http://localhost:5187/collections/${collectionId}/colours`
