@@ -1,18 +1,27 @@
 import { useLocation } from "react-router-dom";
 import ColourGrid from "../components/ColourGrid/ColourGrid";
-import Colours from "./Colours";
+import { Colour } from "../types/colour";
+
+interface CollectionItem {
+  colour: Colour;
+}
+
+interface CollectionData {
+  id: string;
+  name: string;
+  colourCollections: CollectionItem[];
+}
 
 export default function Collection() {
   const location = useLocation();
-  const { collection } = location.state; // Handle possible undefined state
+  const { collection } = location.state as { collection: CollectionData }; 
 
-  // Render a loading state if collection is undefined
   if (!collection) {
     return <div>Loading...</div>;
   }
 
   const coloursArray = collection.colourCollections
-    ? collection.colourCollections.map((item) => item.colour)
+    ? collection.colourCollections.map((item: CollectionItem) => item.colour)
     : [];
 
   return (

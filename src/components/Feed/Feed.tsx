@@ -1,6 +1,5 @@
 import ColourGrid from "../ColourGrid/ColourGrid";
-
-import { useColours } from "../../contexts/ColourContext"; 
+import { useColours } from "../../hooks/useColours";
 
 export default function Feed() {
   const { colours } = useColours(); 
