@@ -48,7 +48,8 @@ export default function PaletteModal({
   //   console.log(userCollections);
   //   const handleClose = () => setOpen(false);
 
-  async function postData(collection: Collection, colour: Colour) {
+  async function addColourToCollection(collection: Collection, colour: Colour) {
+    console.log(colour);
     try {
       const myCollection = await fetch(
         `http://localhost:5187/collections/${collection.id}/colours`
@@ -122,7 +123,9 @@ export default function PaletteModal({
                         <button
                           key={index}
                           className="text-md text-gray-900 mb-2 bg-slate-200 hover:bg-slate-100 p-2"
-                          onClick={() => postData(collection, colour)}
+                          onClick={() =>
+                            addColourToCollection(collection, colour)
+                          }
                         >
                           {collection.name}
                         </button>

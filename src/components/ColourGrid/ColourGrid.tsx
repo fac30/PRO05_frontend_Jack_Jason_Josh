@@ -21,6 +21,7 @@ interface ColourGridProps {
 export default function ColourGrid({ coloursArray }: ColourGridProps) {
   const [collections, setCollections] = useState<[]>([]); // Ensure it's an array by default
   const { userId } = useAuth();
+  const [selectedColour, setSelectedColour] = useState<Colour | null>(null); // Track selected colour
 
   const getCollections = async () => {
     const data = await fetch(
@@ -49,7 +50,10 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
   const [open, setOpen] = useState(false);
 
   // Function to handle opening the modal
-  const handleOpen = () => setOpen(true);
+  const handleOpen = (colour: Colour) => {
+    setSelectedColour(colour); // Set the colour when opening the modal
+    setOpen(true);
+  };
   // Function to handle closing the modal (this would be passed to PaletteModal)
   // const handleClose = () => setOpen(false);
 
@@ -77,11 +81,11 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
           <CardActions>
             <Box display={"flex"} justifyContent={"center"} width={"100%"}>
               <Button size="medium">Favourite</Button>
-              <Button onClick={handleOpen} size="medium">
+              <Button onClick={() => handleOpen(colour)} size="medium">
                 Add to Palette
               </Button>
               <PaletteModal
-                colour={colour}
+                colour={selectedColour} // Pass the selected colour here
                 open={open}
                 setOpen={setOpen}
                 userCollections={collections}
