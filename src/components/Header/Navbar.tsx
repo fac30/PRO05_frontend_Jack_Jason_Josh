@@ -3,7 +3,7 @@ import Searchbar from "../Hero/Searchbar/Searchbar";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function Navbar() {
-  const { isAuthenticated, username, loading, logout } = useAuth();
+  const { isAuthenticated, username, loading, logout, userId } = useAuth();
 
   const navLinks = [
     { text: "Home", link: "/" },
@@ -46,6 +46,18 @@ export default function Navbar() {
               </li>
             );
           })}
+          {isAuthenticated ? (
+            <li>
+              <Link
+                to={`usercollections/${userId}`}
+                className="text-jjjWhite font-medium tracking-wider hover:text-gray-300"
+              >
+                My collections
+              </Link>
+            </li>
+          ) : (
+            <></>
+          )}
         </div>
         <Searchbar />
         {loading ? (

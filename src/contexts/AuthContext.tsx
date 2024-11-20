@@ -4,6 +4,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   username: string | null;
   loading: boolean;
+  userId: string | null;
   error: string | null;
   login: () => void;
   logout: () => void;
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const data = await response.json();
       console.log("Auth status data:", data); // Debug log
-
+      setUserId(data.id);
       setIsAuthenticated(data.isAuthenticated);
       setUsername(data.username);
       setError(null);
@@ -81,6 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         checkAuthStatus,
+        userId,
       }}
     >
       {children}
