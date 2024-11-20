@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useColours } from "../../../hooks/useColours";
 import { Colour } from "../../../types/colour";
 
 export default function Searchbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { colours, fetchColours } = useColours(); 
-  const navigate = useNavigate(); 
+  const { colours, fetchColours } = useColours();
+  const navigate = useNavigate();
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       // Get array of hex codes from the name search endpoint
-      const response = await fetch(`http://localhost:5187/search/colourname?name=${searchQuery}`);
+      const response = await fetch(
+        `http://localhost:5187/search/colourname?name=${searchQuery}`
+      );
       const data = await response.json();
       const hexCodes = data.hexCodes;
 
@@ -23,16 +25,16 @@ export default function Searchbar() {
       // Process each hex code
       for (const hex of hexCodes) {
         // Look for existing colour
-        let matchingColour = colours.find((colour) =>
-          colour.hex.toLowerCase() === hex.toLowerCase()
+        let matchingColour = colours.find(
+          (colour) => colour.hex.toLowerCase() === hex.toLowerCase()
         );
 
         // If no match, create new colour
         if (!matchingColour) {
-          const createResponse = await fetch('http://localhost:5187/colours', {
-            method: 'POST',
+          const createResponse = await fetch("http://localhost:5187/colours", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({ hex }),
           });
@@ -45,8 +47,8 @@ export default function Searchbar() {
           await fetchColours();
 
           // Find the newly created colour
-          matchingColour = colours.find((colour) =>
-            colour.hex.toLowerCase() === hex.toLowerCase()
+          matchingColour = colours.find(
+            (colour) => colour.hex.toLowerCase() === hex.toLowerCase()
           );
         }
 
@@ -55,11 +57,15 @@ export default function Searchbar() {
         }
       }
 
+      // console.log(matchedColours);
+
       // Navigate to colour page with all matched colours
-      navigate("/colourpage", { state: { hexCodes: matchedColours.map(c => c.hex) } });
+      navigate("/colourpage", {
+        state: matchedColours,
+      });
     } catch (error) {
-      console.error('Search failed:', error);
-      alert('Search failed. Please try again.');
+      console.error("Search failed:", error);
+      alert("Search failed. Please try again.");
     }
   };
 
@@ -87,7 +93,7 @@ export default function Searchbar() {
           <input
             type="search"
             id="default-search"
-            value={searchQuery} 
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
             placeholder="Search our Colours"
