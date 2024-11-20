@@ -34,6 +34,16 @@ export default function PaletteModal({
 
   async function postData(collectionId, colourId) {
     try {
+      const collection = await fetch(
+        `http://localhost:5187/collections/${collectionId}/colours`
+      );
+
+      const myJson = await collection.json();
+
+      const myLength = myJson.colours.length;
+
+      console.log(myLength);
+
       const response = await fetch(
         `http://localhost:5187/collections/${collectionId}/colours`,
         {
@@ -43,7 +53,7 @@ export default function PaletteModal({
           },
           body: JSON.stringify({
             colourId: colourId,
-            order: 0,
+            order: myLength,
           }),
         }
       );
@@ -55,6 +65,7 @@ export default function PaletteModal({
 
       const data = await response.json();
       console.log("Success:", data);
+      alert("hello");
     } catch (error) {
       console.error("Error:", error);
     }
