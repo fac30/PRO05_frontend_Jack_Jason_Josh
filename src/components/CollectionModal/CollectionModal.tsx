@@ -66,10 +66,10 @@ export default function CollectionModal({
             <form onSubmit={createCollection}>
               <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
                     <HandThumbUpIcon
                       aria-hidden="true"
-                      className="size-6 text-red-600"
+                      className="size-6 text-green-600"
                     />
                   </div>
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
