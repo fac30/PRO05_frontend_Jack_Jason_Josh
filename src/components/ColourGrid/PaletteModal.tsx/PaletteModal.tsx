@@ -25,7 +25,7 @@ interface PaletteModalProps {
     id: string;
     name: string;
   }>;
-  colourId: string;
+  colourId: number;
 }
 
 export default function PaletteModal({
@@ -37,7 +37,7 @@ export default function PaletteModal({
   //   console.log(userCollections);
   //   const handleClose = () => setOpen(false);
 
-  async function postData(collectionId: string, colourId: string) {
+  async function postData(collectionId: string, colourId: number) {
     try {
       const collection = await fetch(
         `http://localhost:5187/collections/${collectionId}/colours`

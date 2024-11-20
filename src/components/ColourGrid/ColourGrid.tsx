@@ -20,8 +20,7 @@ interface ColourGridProps {
 
 export default function ColourGrid({ coloursArray }: ColourGridProps) {
   const [collections, setCollections] = useState<[]>([]); // Ensure it's an array by default
-  const { isAuthenticated, username, loading, logout, userId } = useAuth();
-  // console.log(userId);
+  const { userId } = useAuth();
 
   const getCollections = async () => {
     const data = await fetch(
@@ -52,7 +51,7 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
   // Function to handle opening the modal
   const handleOpen = () => setOpen(true);
   // Function to handle closing the modal (this would be passed to PaletteModal)
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   return (
     <div className="grid grid-cols-4 w-11/12 m-auto gap-8">
