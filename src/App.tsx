@@ -10,7 +10,7 @@ import ColourPage from "./pages/ColourPage";
 import SignUp from "./components/Auth/SignUp/SignUp";
 import SignIn from "./components/Auth/SignIn/SignIn";
 import UserCollections from "./pages/UserCollections";
-import Collection from "./pages/UserCollections";
+import Collection from "./pages/Collection";
 import { AuthProvider } from "./contexts/AuthContext";
 import "./App.css";
 

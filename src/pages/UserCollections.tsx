@@ -6,7 +6,7 @@ interface Collection {
   name: string;
 }
 
-export default function Collection() {
+export default function UserCollections() {
   const { userId } = useParams<{ userId: string }>();
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate();

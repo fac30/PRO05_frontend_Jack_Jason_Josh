@@ -9,6 +9,8 @@ export default function Collection() {
     return <div>Loading...</div>;
   }
 
+  console.log(collection);
+
   return (
     <div>
       <h1>Collection Details</h1>
