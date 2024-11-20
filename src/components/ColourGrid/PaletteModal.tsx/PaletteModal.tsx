@@ -23,9 +23,42 @@ const style = {
   p: 4,
 };
 
-export default function PaletteModal({ setOpen, open, userCollections }) {
+export default function PaletteModal({
+  setOpen,
+  open,
+  userCollections,
+  colourId,
+}) {
   //   console.log(userCollections);
   //   const handleClose = () => setOpen(false);
+
+  async function postData(collectionId, colourId) {
+    try {
+      const response = await fetch(
+        `http://localhost:5187/collections/${collectionId}/colours`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            colourId: colourId,
+            order: 0,
+          }),
+        }
+      );
+
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -62,6 +95,7 @@ export default function PaletteModal({ setOpen, open, userCollections }) {
                         <button
                           key={index}
                           className="text-md text-gray-900 mb-2 bg-slate-200 hover:bg-slate-100 p-2"
+                          onClick={() => postData(collection.id, colourId)}
                         >
                           {collection.name}
                         </button>
