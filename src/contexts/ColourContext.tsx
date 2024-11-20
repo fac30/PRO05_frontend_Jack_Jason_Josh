@@ -1,13 +1,8 @@
-import { createContext, useState, ReactNode, useContext, useEffect } from "react";
-import { fetchData } from "../utils/fetchData";  
+import { createContext, useState, ReactNode, useEffect } from "react";
+import { fetchData } from "../utils/fetchData";
+import { Colour, ColoursContextType } from "../types/colour";
 
-interface Colour {
-  id: number;
-  hex: string;
-  colourName: string;
-}
-
-const ColoursContext = createContext<{ colours: Colour[]; setColours: (colours: Colour[]) => void } | undefined>(undefined);
+export const ColoursContext = createContext<ColoursContextType | undefined>(undefined);
 
 export const ColoursProvider = ({ children }: { children: ReactNode }) => {
   const [colours, setColours] = useState<Colour[]>([]);
@@ -26,16 +21,8 @@ export const ColoursProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ColoursContext.Provider value={{ colours, setColours }}>
+    <ColoursContext.Provider value={{ colours, setColours, fetchColours }}>
       {children}
     </ColoursContext.Provider>
   );
-};
-
-export const useColours = () => {
-  const context = useContext(ColoursContext);
-  if (!context) {
-    throw new Error("useColours must be used within a ColoursProvider");
-  }
-  return context;
 };
