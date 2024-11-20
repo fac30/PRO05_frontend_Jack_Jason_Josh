@@ -20,7 +20,7 @@ export default function UserCollections() {
   const [collections, setCollections] = useState<Collection[]>([]);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const handleOpen = (colour: Colour) => {
+  const handleOpen = () => {
     setOpen(true);
   };
 

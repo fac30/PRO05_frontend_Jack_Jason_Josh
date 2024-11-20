@@ -20,7 +20,7 @@ export default function CollectionModal({
   const { userId } = useAuth();
   const [collectionName, setCollectionName] = useState(""); // State for input value
 
-  const createCollection = async (e: React.FormEvent) => {
+  const createCollection = async () => {
     // e.preventDefault(); // Prevent default form submission behavior
 
     try {
