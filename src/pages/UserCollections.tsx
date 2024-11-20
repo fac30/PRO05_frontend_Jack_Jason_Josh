@@ -13,7 +13,15 @@ export default function UserCollections() {
 
   const getCollections = async () => {
     const data = await fetch(
-      `http://localhost:5187/collections/user/${userId}`
+      `http://localhost:5187/collections/user/${userId}`,
+      {
+        method: "GET", // or whatever method you need (POST, PUT, etc.)
+        headers: {
+          "Content-Type": "application/json",
+          // You can add other headers here if needed
+        },
+        credentials: "include", // This will send cookies and authentication data
+      }
     );
 
     const myData = await data.json();
@@ -28,7 +36,6 @@ export default function UserCollections() {
   }, []);
 
   const handleCollectionClick = (collection) => {
-
     navigate("/collection", { state: { collection } });
   };
 
