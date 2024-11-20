@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
-import { Button } from "@mui/material";
+
 import CollectionModal from "../components/CollectionModal/CollectionModal";
 import ColourGrid from "../components/ColourGrid/ColourGrid";
 
@@ -56,13 +56,27 @@ export default function UserCollections() {
   return (
     <div>
       <h1 className="text-5xl text-center mb-10">My Collections</h1>
-      <div className="w-11/12 m-auto grid grid-cols-2 gap-10">
+      <button
+        onClick={handleOpen}
+        className="text-center text-xl bg-jjjBlue text-white p-5 ml-16"
+      >
+        Create New Collection
+        {/* <Button
+          onClick={handleOpen}
+          size="large"
+          color="inherit"
+          className="text-center text-7xl ml-56"
+        >
+          Create New Collection
+        </Button> */}
+      </button>
+      <div className="w-11/12 m-auto grid grid-cols-2 gap-10 mt-10">
         {collections.map((collection) => (
           <>
             <div className="border mb-10  bg-gray-100 shadow-sm pb-8 flex flex-col justify-center">
-              <div className=" bg-gray-500 py-4 mb-8">
+              <div className=" bg-jjjBlue py-4 mb-8">
                 <h2
-                  className=" ml-5 text-3xl text-white"
+                  className=" ml-5 text-3xl text-white text-center"
                   key={collection.id}
                   onClick={() => handleCollectionClick(collection)}
                   style={{ cursor: "pointer" }}
@@ -85,9 +99,6 @@ export default function UserCollections() {
           </>
         ))}
       </div>
-      <Button onClick={handleOpen} size="large" color="success">
-        Create collection
-      </Button>
       <CollectionModal open={open} setOpen={setOpen} />
     </div>
   );
