@@ -84,12 +84,14 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
               <Button onClick={() => handleOpen(colour)} size="medium">
                 Add to Palette
               </Button>
-              <PaletteModal
-                colour={selectedColour} // Pass the selected colour here
-                open={open}
-                setOpen={setOpen}
-                userCollections={collections}
-              />
+              {selectedColour && (
+                <PaletteModal
+                  colour={selectedColour} // Pass the selected colour here
+                  open={open}
+                  setOpen={setOpen}
+                  userCollections={collections}
+                />
+              )}
             </Box>
           </CardActions>
         </Card>
