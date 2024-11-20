@@ -4,7 +4,8 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface CollectionModalProps {
   setOpen: (open: boolean) => void;
@@ -15,6 +16,34 @@ export default function CollectionModal({
   setOpen,
   open,
 }: CollectionModalProps) {
+  const { userId } = useAuth();
+
+  const createCollection = async (collectionName) => {
+    try {
+      const response = await fetch(`http://localhost:5187/collections`, {
+        method: "POST", // Specify the HTTP method
+        headers: {
+          "Content-Type": "application/json", // Set content type to JSON
+        },
+        body: JSON.stringify({
+          name: collectionName,
+          description: "string",
+          type: "palette",
+          isPublic: true,
+          userId: userId,
+        }),
+      });
+
+      if (!response) {
+        console.log(`create collection has failed`);
+      }
+
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -30,10 +59,10 @@ export default function CollectionModal({
           >
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
-                  <ExclamationTriangleIcon
+                <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
+                  <HandThumbUpIcon
                     aria-hidden="true"
-                    className="size-6 text-red-600"
+                    className="size-6 text-green-600"
                   />
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -51,7 +80,7 @@ export default function CollectionModal({
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={() => createCollection(field.value)}
                 className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
               >
                 Create collection
