@@ -60,27 +60,9 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 export default function SignIn() {
   const { checkAuthStatus, isAuthenticated } = useAuth();
 
-  const [emailError, setEmailError] = React.useState(false);
-  const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Form submitted");
-
-    if (emailError || passwordError) {
-      return;
-    }
 
     const data = new FormData(event.currentTarget);
 
@@ -150,8 +132,6 @@ export default function SignIn() {
             <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
-                error={emailError}
-                helperText={emailErrorMessage}
                 id="email"
                 type="email"
                 name="email"
@@ -161,14 +141,11 @@ export default function SignIn() {
                 required
                 fullWidth
                 variant="outlined"
-                color={emailError ? "error" : "primary"}
               />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
               <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
                 name="password"
                 placeholder="••••••"
                 type="password"
@@ -178,7 +155,6 @@ export default function SignIn() {
                 required
                 fullWidth
                 variant="outlined"
-                color={passwordError ? "error" : "primary"}
               />
             </FormControl>
             <FormControlLabel
@@ -192,7 +168,6 @@ export default function SignIn() {
             <Link
               component="button"
               type="button"
-              onClick={handleClickOpen}
               variant="body2"
               sx={{ alignSelf: "center" }}
             >
