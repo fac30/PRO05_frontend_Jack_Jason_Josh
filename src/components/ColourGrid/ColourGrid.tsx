@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
 
 interface Colour {
   id: number;
@@ -19,7 +18,7 @@ interface ColourGridProps {
 export default function ColourGrid({ coloursArray }: ColourGridProps) {
   return (
     <div className="grid grid-cols-4 w-11/12 m-auto gap-8">
-      {coloursArray.map((colour, index) => (
+      {coloursArray.map((colour) => (
         <Card key={colour.id}>
           <CardContent>
             <Box
