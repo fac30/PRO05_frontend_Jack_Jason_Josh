@@ -1,4 +1,6 @@
 import { useLocation } from "react-router-dom";
+import ColourGrid from "../components/ColourGrid/ColourGrid";
+import Colours from "./Colours";
 
 export default function Collection() {
   const location = useLocation();
@@ -9,13 +11,16 @@ export default function Collection() {
     return <div>Loading...</div>;
   }
 
-  console.log(collection);
+  const coloursArray = collection.colourCollections
+    ? collection.colourCollections.map((item) => item.colour)
+    : [];
 
   return (
     <div>
       <h1>Collection Details</h1>
       <h2>Name: {collection.name}</h2>
       <p>ID: {collection.id}</p>
+      <ColourGrid coloursArray={coloursArray}></ColourGrid>
     </div>
   );
 }
