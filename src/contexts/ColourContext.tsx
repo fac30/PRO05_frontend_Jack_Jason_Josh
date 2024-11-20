@@ -4,6 +4,7 @@ import { fetchData } from "../utils/fetchData";
 interface Colour {
   id: number;
   hex: string;
+  colourName: string;
 }
 
 const ColoursContext = createContext<{ colours: Colour[]; setColours: (colours: Colour[]) => void } | undefined>(undefined);
