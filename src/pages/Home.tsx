@@ -1,11 +1,11 @@
 import Hero from "../components/Hero/Hero";
-import Feed from "../components/Feed/Feed";
+import CollectionFeed from "../components/CollectionFeed/CollectionFeed";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <Feed />
+      <CollectionFeed />
     </main>
   );
 }
