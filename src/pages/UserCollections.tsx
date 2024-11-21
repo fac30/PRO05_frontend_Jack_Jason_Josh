@@ -18,8 +18,8 @@ interface Collection {
 }
 
 export default function UserCollections() {
-  const { userId } = useParams<{ userId: string }>();
-  const { loggedInUserId } = useAuth(); // Get the logged-in user's ID
+  const { myUserId } = useParams<{ myUserId: string }>();
+  const { userId } = useAuth(); // Get the logged-in user's ID
   const [collections, setCollections] = useState<Collection[]>([]);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -66,7 +66,7 @@ export default function UserCollections() {
   return (
     <div>
       <h1 className="text-5xl text-center mb-10">My Collections</h1>
-      {userId === loggedInUserId && ( // Only show the button if the user IDs match
+      {myUserId === userId && ( // Only show the button if the user IDs match
         <button
           onClick={handleOpen}
           className="text-center text-xl bg-jjjBlue text-white p-5 ml-16 hover:bg-[#4e758a]"

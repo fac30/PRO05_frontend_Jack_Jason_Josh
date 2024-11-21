@@ -33,7 +33,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/users" element={<Users />} />
             <Route
-              path="/usercollections/:userId"
+              path="/usercollections/:myUserId"
               element={<UserCollections />}
             />
             <Route path="/collection" element={<Collection />} />
