@@ -16,13 +16,18 @@ export default function Users() {
 
   return (
     <h1>
-      {users.map((user) => {
-        return (
-          <a href={`http://localhost:6969/usercollections/${user.id}`}>
-            {user.email}
-          </a>
-        );
-      })}
+      <div className="flex gap-10 text-center w-3/4 m-auto">
+        {users.map((user) => {
+          return (
+            <a
+              className="bg-jjjBlue text-jjjWhite p-4 text-xl font-normal text-center w-1/2 m-auto "
+              href={`http://localhost:6969/usercollections/${user.id}`}
+            >
+              {user.email}
+            </a>
+          );
+        })}
+      </div>
     </h1>
   );
 }
