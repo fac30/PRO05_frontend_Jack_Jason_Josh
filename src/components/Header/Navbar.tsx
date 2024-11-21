@@ -31,8 +31,8 @@ export default function Navbar() {
 
   return (
     <nav className="w-screen bg-jjjBlue py-2 mb-24 flex justify-between items-center">
-      <ul className="  list-none w-11/12 m-auto flex justify-between items-center">
-        <div className="flex justify-between items-center uppercase min-w-96 mr-52">
+      <ul className="  list-none w-[95%] m-auto flex justify-between items-center">
+        <div className="flex justify-between items-center uppercase min-w-[410px] mr-36">
           {navLinks.map((link) => {
             return (
               <li key={link.text}>
