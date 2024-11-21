@@ -30,9 +30,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-screen bg-jjjBlue py-2 mb-24 flex justify-between">
-      <ul className="  list-none w-11/12 m-auto flex justify-between">
-        <div className="flex justify-between items-center uppercase w-1/2 mr-52">
+    <nav className="w-screen bg-jjjBlue py-2 mb-24 flex justify-between items-center">
+      <ul className="  list-none w-[95%] m-auto flex justify-between items-center">
+        <div className="flex justify-between items-center uppercase min-w-[410px] mr-36">
           {navLinks.map((link) => {
             return (
               <li key={link.text}>
@@ -64,20 +64,19 @@ export default function Navbar() {
           <div>Loading...</div>
         ) : isAuthenticated ? (
           <>
-            <span className="text-white">Welcome, {username}</span>
+            <span className=" ml-8 text-xl text-white">
+              Welcome, {username}
+            </span>
             <button
-              className="hover:bg-gray-200 ml-4 bg-jjjWhite font-semibold rounded-xl px-4"
+              className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8 min-w-36"
               onClick={handleLogout}
             >
-              Logout
+              Log Out
             </button>
           </>
         ) : (
-          <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-semibold rounded-xl w-52 text-lg">
-            <Link
-              to="/signup"
-              className="text-black font-medium tracking-wider"
-            >
+          <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8  min-w-36">
+            <Link to="/signup" className="text-black tracking-wider">
               Sign Up
             </Link>
           </button>
