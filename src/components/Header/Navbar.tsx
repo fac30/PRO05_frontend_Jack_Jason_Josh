@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const navLinks = [
     { text: "Home", link: "/" },
-    { text: "about", link: "/about" },
+    { text: "users", link: "/users" },
     { text: "colours", link: "/colours" },
   ];
 

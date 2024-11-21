@@ -12,6 +12,7 @@ import SignIn from "./components/Auth/SignIn/SignIn";
 import UserCollections from "./pages/UserCollections";
 import Collection from "./pages/Collection";
 import { AuthProvider } from "./contexts/AuthContext";
+import Users from "./pages/Users";
 import "./App.css";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/colourpage" element={<ColourPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/users" element={<Users />} />
             <Route
               path="/usercollections/:userId"
               element={<UserCollections />}
