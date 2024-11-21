@@ -23,6 +23,7 @@ export default function UserCollections() {
   const [collections, setCollections] = useState<Collection[]>([]);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>();
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,7 +58,23 @@ export default function UserCollections() {
 
   useEffect(() => {
     getCollections();
+    getUserName();
   }, [getCollections]);
+
+  const getUserName = async () => {
+    const response = await fetch(
+      `http://localhost:5187/users/${collectionUserId}`
+    );
+
+    const myData = await response.json();
+    console.log("kahsdfkjhasdf");
+    console.log(myData);
+    const username = myData.email.split("@")[0]; 
+
+    setUserEmail(username);
+
+    console.log(response);
+  };
 
   const handleCollectionClick = (collection: Collection) => {
     navigate("/collection", { state: { collection } });
@@ -76,7 +93,7 @@ export default function UserCollections() {
           </button>
         </>
       ) : (
-        <h1 className="text-5xl text-center mb-10">{`${collectionUserId}'s Collections`}</h1>
+        <h1 className="text-5xl text-center mb-10">{`${userEmail}'s Collections`}</h1>
       )}
       <div className="w-11/12 m-auto grid grid-cols-2 gap-10 mt-10">
         {collections.length > 0 ? (
