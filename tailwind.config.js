@@ -10,6 +10,9 @@ export default {
         jjjGreen: "#AAA95A",
         jjjYellow: "#FFBE0B",
       },
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+      },
     },
   },
   plugins: [],

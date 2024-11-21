@@ -58,7 +58,7 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
   // const handleClose = () => setOpen(false);
 
   return (
-    <div className="flex flex-wrap w-11/12 m-auto gap-8">
+    <div className="flex flex-wrap w-11/12 m-auto gap-10 justify-center">
       {coloursArray.map((colour) => (
         <Card key={colour.id}>
           <CardContent>
