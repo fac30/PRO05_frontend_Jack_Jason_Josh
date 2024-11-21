@@ -68,14 +68,14 @@ export default function Navbar() {
               Welcome, {username}
             </span>
             <button
-              className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8"
+              className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8 min-w-36"
               onClick={handleLogout}
             >
               Log Out
             </button>
           </>
         ) : (
-          <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8">
+          <button className="hover:bg-gray-200 ml-20 bg-jjjWhite font-medium rounded-xl text-lg py-2  px-8  min-w-36">
             <Link to="/signup" className="text-black tracking-wider">
               Sign Up
             </Link>
