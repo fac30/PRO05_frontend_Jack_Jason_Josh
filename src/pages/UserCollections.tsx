@@ -31,7 +31,7 @@ export default function UserCollections() {
   const getCollections = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:5187/collections/user/${userId}`,
+        `http://localhost:5187/collections/user/${collectionUserId}`,
         {
           method: "GET",
           headers: {
@@ -53,7 +53,7 @@ export default function UserCollections() {
       console.error("Failed to fetch collections:", error);
       setCollections([]); // Default to an empty array
     }
-  }, [userId]);
+  }, [collectionUserId]);
 
   useEffect(() => {
     getCollections();
@@ -65,14 +65,18 @@ export default function UserCollections() {
 
   return (
     <div>
-      <h1 className="text-5xl text-center mb-10">My Collections</h1>
-      {collectionUserId === userId && ( // Only show the button if the user IDs match
-        <button
-          onClick={handleOpen}
-          className="text-center text-xl bg-jjjBlue text-white p-5 ml-16 hover:bg-[#4e758a]"
-        >
-          Create New Collection
-        </button>
+      {collectionUserId === userId ? ( // Only show the button if the user IDs match
+        <>
+          <h1 className="text-5xl text-center mb-10">My Collections</h1>
+          <button
+            onClick={handleOpen}
+            className="text-center text-xl bg-jjjBlue text-white p-5 ml-16 hover:bg-[#4e758a]"
+          >
+            Create New Collection
+          </button>
+        </>
+      ) : (
+        <h1 className="text-5xl text-center mb-10">{`${collectionUserId}'s Collections`}</h1>
       )}
       <div className="w-11/12 m-auto grid grid-cols-2 gap-10 mt-10">
         {collections.length > 0 ? (
