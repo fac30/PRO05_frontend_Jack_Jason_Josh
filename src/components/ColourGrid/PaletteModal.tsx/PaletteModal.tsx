@@ -4,7 +4,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 
 // const style = {
 //   position: "absolute",
@@ -103,20 +103,20 @@ export default function PaletteModal({
           >
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
-                  <ExclamationTriangleIcon
+                <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
+                  <AdjustmentsHorizontalIcon
                     aria-hidden="true"
-                    className="size-6 text-red-600"
+                    className="size-6 text-green-600"
                   />
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <DialogTitle
                     as="h3"
-                    className="text-base font-semibold text-gray-900"
+                    className=" mt-2 text-center ml-5 text-xl font-semibold text-gray-900"
                   >
                     Add Colour to Palette
                   </DialogTitle>
-                  <div className="mt-2 flex flex-col">
+                  <div className=" flex flex-col ml-14 mt-10">
                     {Array.isArray(userCollections) &&
                     userCollections.length > 0 ? (
                       userCollections.map((collection, index) => (
@@ -137,7 +137,7 @@ export default function PaletteModal({
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 ">
               {/* <button
                 type="button"
                 onClick={() => setOpen(false)}

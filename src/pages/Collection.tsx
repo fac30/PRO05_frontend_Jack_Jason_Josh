@@ -14,7 +14,7 @@ interface CollectionData {
 
 export default function Collection() {
   const location = useLocation();
-  const { collection } = location.state as { collection: CollectionData }; 
+  const { collection } = location.state as { collection: CollectionData };
 
   if (!collection) {
     return <div>Loading...</div>;
@@ -25,10 +25,9 @@ export default function Collection() {
     : [];
 
   return (
-    <div>
-      <h1>Collection Details</h1>
-      <h2>Name: {collection.name}</h2>
-      <p>ID: {collection.id}</p>
+    <div className="mb-96">
+      <h1 className="text-5xl text-center mb-10">{collection.name}</h1>
+
       <ColourGrid coloursArray={coloursArray}></ColourGrid>
     </div>
   );

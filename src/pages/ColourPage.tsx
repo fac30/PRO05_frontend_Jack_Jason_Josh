@@ -1,16 +1,16 @@
 import { useLocation } from "react-router-dom";
-import ColourCard from "../components/ColourCard"; 
+// import ColourCard from "../components/ColourCard";
+import ColourGrid from "../components/ColourGrid/ColourGrid";
 
 export default function ColourPage() {
   const location = useLocation();
-  const { hexCodes } = location.state || { hexCodes: [] };
+  const colours = location.state || { hexCodes: [] };
+  console.log(colours);
 
   return (
     <div className="colour-page">
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 p-4">
-        {hexCodes.map((hex: string) => (
-          <ColourCard key={hex} hex={hex} />
-        ))}
+      <div>
+        <ColourGrid coloursArray={colours} />
       </div>
     </div>
   );

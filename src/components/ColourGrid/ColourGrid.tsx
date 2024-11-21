@@ -58,7 +58,7 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
   // const handleClose = () => setOpen(false);
 
   return (
-    <div className="grid grid-cols-4 w-11/12 m-auto gap-8">
+    <div className="flex flex-wrap w-11/12 m-auto gap-8">
       {coloursArray.map((colour) => (
         <Card key={colour.id}>
           <CardContent>
@@ -84,12 +84,14 @@ export default function ColourGrid({ coloursArray }: ColourGridProps) {
               <Button onClick={() => handleOpen(colour)} size="medium">
                 Add to Palette
               </Button>
-              <PaletteModal
-                colour={selectedColour} // Pass the selected colour here
-                open={open}
-                setOpen={setOpen}
-                userCollections={collections}
-              />
+              {selectedColour && (
+                <PaletteModal
+                  colour={selectedColour} // Pass the selected colour here
+                  open={open}
+                  setOpen={setOpen}
+                  userCollections={collections}
+                />
+              )}
             </Box>
           </CardActions>
         </Card>
